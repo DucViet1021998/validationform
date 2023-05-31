@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Box, Button, TextField, InputAdornment, Grid } from '@mui/material';
-// import {PersonIcon,  LockOpenIcon } from '@mui/icons-material';
 import { Person, LockOpen, VpnKey, Mail, Phone } from '@mui/icons-material';
 import { z, ZodType } from 'zod';
 import { useForm } from 'react-hook-form';
@@ -28,7 +27,9 @@ export default function Form() {
                 .regex(new RegExp('^[a-zA-Z0-9.]*$'), 'Not contain special characters'),
             phone: z
                 .string()
-                .trim()
+                .nonempty({
+                    message: 'Phone numbers is required!',
+                })
                 .min(10, { message: 'Phone numbers are a minium of 10 digits' })
                 .length(10, { message: 'Ten numbers are required!' })
                 .regex(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/, {
@@ -46,9 +47,12 @@ export default function Form() {
                     message: 'Password is required!',
                 })
                 .min(8),
-            confirmPassword: z.string().min(8).nonempty({
-                message: 'Please confirm your password!',
-            }),
+            confirmPassword: z
+                .string()
+                .nonempty({
+                    message: 'Please confirm your password!',
+                })
+                .min(8),
         })
         .refine((data) => data.password === data.confirmPassword, {
             message: 'Password not match!',
@@ -68,13 +72,7 @@ export default function Form() {
 
     return (
         <Box component="form" noValidate autoComplete="off" onSubmit={handleSubmit(submitData)}>
-            <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                // spacing={2}
-                alignItems="center"
-            >
+            <Grid container direction="column" justifyContent="center" alignItems="center">
                 <Grid xs={12} item>
                     <TextField
                         label="Username"
@@ -117,6 +115,7 @@ export default function Form() {
                     <TextField
                         label="Phone"
                         fullWidth
+                        required
                         margin="normal"
                         {...register('phone')}
                         error={!!errors['phone']}
