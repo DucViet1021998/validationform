@@ -66,7 +66,7 @@ export default function Form() {
     } = useForm<FormData>({ resolver: zodResolver(schema) });
 
     const submitData = (data: FormData) => {
-        // alert('Bật F12 để xem value trong console anh nhé!');
+        alert('Đăng ký thành công');
         console.log(data);
     };
 
