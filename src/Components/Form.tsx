@@ -21,41 +21,41 @@ export default function Form() {
             userName: z
                 .string()
                 .nonempty({
-                    message: 'User Name is required!',
+                    message: 'Vui lòng nhập Username!',
                 })
                 .min(5)
-                .regex(new RegExp('^[a-zA-Z0-9.]*$'), 'Not contain special characters'),
+                .regex(new RegExp('^[a-zA-Z0-9.]*$'), 'Không nhập ký tự đặc biệt'),
             phone: z
                 .string()
                 .nonempty({
-                    message: 'Phone numbers is required!',
+                    message: 'Vui lòng nhập số điện thoại!',
                 })
-                .min(10, { message: 'Phone numbers are a minium of 10 digits' })
-                .length(10, { message: 'Ten numbers are required!' })
+                .min(10, { message: 'Số điện thoại có ít nhất mười số' })
+                // .length(10, { message: 'Ten numbers are required!' })
                 .regex(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/, {
-                    message: 'Only numbers are allowed',
+                    message: 'Số điện thoại của bạn không đúng định dạng',
                 }),
             email: z
                 .string()
                 .nonempty({
-                    message: 'Email is required!',
+                    message: 'Vui lòng nhập số điện thoại!',
                 })
-                .email({ message: 'Invalid email address' }),
+                .email({ message: 'Không đúng dạng địa chỉ email' }),
             password: z
                 .string()
                 .nonempty({
-                    message: 'Password is required!',
+                    message: 'Vui lòng nhập mật khẩu!',
                 })
                 .min(8),
             confirmPassword: z
                 .string()
                 .nonempty({
-                    message: 'Please confirm your password!',
+                    message: 'Vui lòng xác nhận lại mật khẩu!',
                 })
                 .min(8),
         })
         .refine((data) => data.password === data.confirmPassword, {
-            message: 'Password not match!',
+            message: 'Mật khẩu không trùng khớp!',
             path: ['confirmPassword'],
         });
 
@@ -66,7 +66,7 @@ export default function Form() {
     } = useForm<FormData>({ resolver: zodResolver(schema) });
 
     const submitData = (data: FormData) => {
-        alert('Bật F12 để xem value trong console anh nhé!');
+        // alert('Bật F12 để xem value trong console anh nhé!');
         console.log(data);
     };
 

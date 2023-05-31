@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import Form from './components/Form';
+import Form from '../Components/Form';
 import { Grid } from '@mui/material';
 
 export default function Home() {
@@ -11,12 +11,11 @@ export default function Home() {
                 style={{ height: '100vh' }}
                 container
                 direction="column"
-                // spacing={2}
                 justifyContent="center"
                 alignItems="center"
             >
                 <Grid item>
-                    <img width="218" height="78" src="https://i.imgur.com/WbxNsdl.png" alt="logo" />
+                    <Image width="218" height="78" src="/Logo.png" alt="logo" />
                 </Grid>
                 <Grid
                     style={{
@@ -25,7 +24,6 @@ export default function Home() {
                         padding: '10px 100px 50px 100px',
                     }}
                     item
-                    // xs={6}
                 >
                     <Form />
                 </Grid>
