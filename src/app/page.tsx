@@ -20,7 +20,7 @@ export default function Home() {
                 </Grid>
                 <Grid
                     style={{
-                        backgroundColor: 'rgba(255,255,255, 0.4)',
+                        backgroundColor: 'rgba(255,255,255, 0.7)',
                         borderRadius: '10px',
                         padding: '10px 100px 50px 100px',
                     }}
