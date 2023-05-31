@@ -21,19 +21,19 @@ export default function Form() {
             userName: z
                 .string()
                 .nonempty({
-                    message: 'Vui lòng nhập Username!',
+                    message: 'Tên đăng nhập không được để trống!',
                 })
-                .min(5)
-                .regex(new RegExp('^[a-zA-Z0-9.]*$'), 'Không nhập ký tự đặc biệt'),
+                .min(5, { message: 'Tên đăng nhập ít nhất 5 ký tự' })
+                .regex(new RegExp('^[a-zA-Z0-9.]*$'), 'Vui lòng không nhập ký tự đặc biệt'),
             phone: z
                 .string()
                 .nonempty({
-                    message: 'Vui lòng nhập số điện thoại!',
+                    message: 'Số điện thoại không được để trống!',
                 })
                 .min(10, { message: 'Số điện thoại có ít nhất mười số' })
                 // .length(10, { message: 'Ten numbers are required!' })
                 .regex(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/, {
-                    message: 'Số điện thoại của bạn không đúng định dạng',
+                    message: 'Số điện thoại không đúng định dạng',
                 }),
             email: z
                 .string()
@@ -44,15 +44,15 @@ export default function Form() {
             password: z
                 .string()
                 .nonempty({
-                    message: 'Vui lòng nhập mật khẩu!',
+                    message: 'Email không được để trống!',
                 })
-                .min(8),
+                .min(8, { message: 'Mật khẩu ít nhất 8 ký tự' }),
             confirmPassword: z
                 .string()
                 .nonempty({
                     message: 'Vui lòng xác nhận lại mật khẩu!',
                 })
-                .min(8),
+                .min(8, { message: 'Mật khẩu ít nhất 8 ký tự' }),
         })
         .refine((data) => data.password === data.confirmPassword, {
             message: 'Mật khẩu không trùng khớp!',
@@ -75,7 +75,7 @@ export default function Form() {
             <Grid container direction="column" justifyContent="center" alignItems="center">
                 <Grid xs={12} item>
                     <TextField
-                        label="Username"
+                        label="Tên Đăng Nhập"
                         fullWidth
                         required
                         margin="normal"
@@ -113,7 +113,7 @@ export default function Form() {
 
                 <Grid xs={12} item>
                     <TextField
-                        label="Phone"
+                        label="Số Điện Thoại"
                         fullWidth
                         required
                         margin="normal"
@@ -132,7 +132,7 @@ export default function Form() {
 
                 <Grid xs={12} item>
                     <TextField
-                        label="Password"
+                        label="Mật Khẩu"
                         fullWidth
                         required
                         margin="normal"
@@ -152,7 +152,7 @@ export default function Form() {
 
                 <Grid xs={12} item>
                     <TextField
-                        label="Confirm Password"
+                        label="Xác Nhận Mật Khẩu"
                         fullWidth
                         required
                         margin="normal"
