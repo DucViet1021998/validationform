@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 import { Box, Button, TextField, InputAdornment, Grid } from '@mui/material';
 import { Person, LockOpen, VpnKey, Mail, Phone } from '@mui/icons-material';
 import { z, ZodType } from 'zod';
@@ -9,13 +8,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 type FormData = {
     userName: string;
-    phone: string | number;
+    phone: string;
     email: string;
     password: string;
     confirmPassword: string;
 };
 
 export default function Form() {
+    const exceptThisSymbols = ['e', 'E', '+', '-', '.'];
     const schema: ZodType<FormData> = z
         .object({
             userName: z
@@ -31,7 +31,6 @@ export default function Form() {
                     message: 'Số điện thoại không được để trống!',
                 })
                 .min(10, { message: 'Số điện thoại có ít nhất mười số' })
-                .length(10, { message: 'Ten numbers are required!' })
                 .regex(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/, {
                     message: 'Số điện thoại không đúng định dạng',
                 }),
@@ -113,8 +112,10 @@ export default function Form() {
 
                 <Grid xs={12} item>
                     <TextField
+                        onKeyDown={(e) => exceptThisSymbols.includes(e.key) && e.preventDefault()}
                         label="Số Điện Thoại"
                         fullWidth
+                        type="number"
                         required
                         margin="normal"
                         {...register('phone')}
