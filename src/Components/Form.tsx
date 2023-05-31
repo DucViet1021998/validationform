@@ -31,7 +31,7 @@ export default function Form() {
                     message: 'Số điện thoại không được để trống!',
                 })
                 .min(10, { message: 'Số điện thoại có ít nhất mười số' })
-                // .length(10, { message: 'Ten numbers are required!' })
+                .length(10, { message: 'Ten numbers are required!' })
                 .regex(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/, {
                     message: 'Số điện thoại không đúng định dạng',
                 }),
@@ -173,7 +173,7 @@ export default function Form() {
                 </Grid>
                 <Grid xs={12} item>
                     <Button size="large" type="submit" variant="contained">
-                        Submit
+                        Đăng ký
                     </Button>
                 </Grid>
             </Grid>
