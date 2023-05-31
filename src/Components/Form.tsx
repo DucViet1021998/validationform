@@ -38,13 +38,13 @@ export default function Form() {
             email: z
                 .string()
                 .nonempty({
-                    message: 'Vui lòng nhập số điện thoại!',
+                    message: 'Email không được để trống!',
                 })
                 .email({ message: 'Không đúng dạng địa chỉ email' }),
             password: z
                 .string()
                 .nonempty({
-                    message: 'Email không được để trống!',
+                    message: 'Mật khẩu không được để trống!',
                 })
                 .min(8, { message: 'Mật khẩu ít nhất 8 ký tự' }),
             confirmPassword: z
